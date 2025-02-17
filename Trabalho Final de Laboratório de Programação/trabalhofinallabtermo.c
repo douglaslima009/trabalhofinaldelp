@@ -7,6 +7,16 @@
 //implementação do jogo "Termo" em C, seguindo os requisitos do trabalho prático. 
 //Ele carrega palavras de um arquivo, escolhe uma aleatoriamente e permite até 6 tentativas para adivinhar.
 
+// "()" -> Letra correta em local errado.
+// "[]" -> Letra correta em local correto.
+
+//Alunos: Douglas Lima Menezes (552590)
+//Carol Lima Fonseca (567179)
+//Francisco Wandallis (553083)
+//Mateus de Oliveira Trajano (540020)
+//Jânio Cayo Borges Lima (519325)
+//Fransico Kaue Borges Bezerra (553878)
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -36,7 +46,7 @@ int main() {
     carregarPalavras(palavras, &quantidade);
     escolherPalavra(palavras, quantidade, palavraSecreta);
 
-    printf("Bem-vindo ao jogo Termo!\n\n");
+    printf("Bem-vindo ao Termo!\n\n");
     jogar(palavraSecreta, &pontuacao);
     salvarPontuacao(pontuacao);
 
@@ -46,7 +56,7 @@ int main() {
 void carregarPalavras(Palavra palavras[], int *quantidade) {
     FILE *arquivo = fopen(ARQUIVO_PALAVRAS, "r");
     if (!arquivo) {
-        printf("Erro ao abrir o arquivo de palavras.\n");
+        printf("Erro ao abrir o arquivo das palavras.\n");
         exit(1);
     }
     while (fscanf(arquivo, "%s", palavras[*quantidade].palavra) != EOF) {
@@ -84,11 +94,11 @@ void jogar(char palavraSecreta[], int *pontuacao) {
 void mostrarResultado(char tentativa[], char palavraSecreta[]) {
     for (int i = 0; i < MAX_PALAVRA - 1; i++) {
         if (tentativa[i] == palavraSecreta[i]) {
-            printf("[%c] ", tentativa[i]); // Letra correta e na posição correta
+            printf("[%c] ", tentativa[i]);
         } else if (strchr(palavraSecreta, tentativa[i])) {
-            printf("(%c) ", tentativa[i]); // Letra correta, mas na posição errada
+            printf("(%c) ", tentativa[i]);
         } else {
-            printf(" %c  ", tentativa[i]); // Letra errada
+            printf(" %c  ", tentativa[i]);
         }
     }
     printf("\n");
